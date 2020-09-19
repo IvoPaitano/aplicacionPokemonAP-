@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POKE API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark ">
+        <h1 class="navbar-brand" href="#">Aplicación con PokéAPI</h1>
+        <button class="hamburger hamburger--collapse" type="button" id="menuButton">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+    </nav>
+    
+    <aside class="text-center hidden" id="pokemonModal">
+      <h2>Guia PokeAPI</h2>
+      <p>
+      Bienvenido a POKEAPIAPP.
+      Con la ayuda de esta pequeña guia podras usar a gusto nuestra aplicacion.
+      </p>
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-2 col-md-12">
+          <strong>Busqueda por nombre :</strong><br>
+          <p class="text-justify">
+            Solo basta con poner el nombre del pokemon para que la app te muestre, en modo carta, las caracteristicas de dicho pokemon.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-12">
+          <strong>Busqueda por ID :</strong><br>
+          <p class="text-justify">
+            Solo basta con poner un ID para que la app te muestra, en modo carta, las caracteristicas
+            del pokemon con dicho ID.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-12">
+          <strong>Busqueda por Tipo:</strong><br>
+          <p class="text-justify">
+            Para buscar pokemones segun su tipo debes ingresar un numero, ya que cada 'tipo' tiene asignado un numero, hay un total de 18 tipos de pokemones, te dejamos algunas, diviertete aventurando con las que quedan.
+          </p>
+          <ul class="text-center">
+          <strong>TIPO</strong>
+            <li class="text-left">1 ----- normal</li>
+            <li class="text-left">2 ----- lucha</li>
+            <li class="text-left">3 ----- volador</li>
+            <li class="text-left">4 ----- veneno</li>
+            <li class="text-left">5 ----- tierra</li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-12">
+          <strong>Busqueda por Habilidad:</strong><br>
+          <p class="text-justify">
+            Esta busqueda funciona igual que la busqueda por 'TIPO', es decir con numeros, hay un total de 258 habilidades, te dejamos algunas, diviertete aventurando con las que quedan.
+          </p>
+          <ul class="text-center">
+          <strong>HABILIDAD</strong>
+            <li class="text-left">1 ----- hedor</li>
+            <li class="text-left">2 ----- llovizna</li>
+            <li class="text-left">3 ----- velocidad</li>
+            <li class="text-left">4 ----- armadura</li>
+            <li class="text-left">5 ----- robustez</li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-12">
+          <strong>Busqueda de N° a N°:</strong><br>
+          <p class="text-justify">
+            Este modo de busqueda tiene 2 campos, en el primer campo ingresaras la cantidad de pokemones que deseas ver y en el segundo campo a partir de que numero de pokemon(ID).
+            <br>
+            Ejemplo Primer valor = 10;Segundo valor = 1.Esto devolvera por resultado los 10 primeros pokemones a partir del pokemon 1.
+          </p>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </aside>
+
+    <div class="container">
+    <form class="row" action="" id="form">
+        <div class="form-group col-lg-6 col-md-12">
+            <label for="search">Modo de Busqueda:</label>
+            <select id="search" class="form-control" name="search">
+              <option value="name">Nombre</option>
+              <option value="idPokemon">Id Pokemon</option>
+              <option value="typePokemon">Pokemones tipo</option>
+              <option value="abilityPokemon">Pokemones de habilidad</option>
+              <option value="limitPokemon">N° Pokémones desde N°</option>
+            </select>
+          </div>
+        <div class="form-group col-lg-3 col-md-12">
+          <label for="valueOne" id="labelOne">Pokémon</label>
+          <input type="text" name="valueOne" class="form-control" id="valueOneI" placeholder="" autocomplete="OFF">
+        </div>
+        <div class="form-group col-lg-3 col-md-12">
+            <label for="valueTwo" id="labelTwo">-</label>
+            <input type="text" name="valueTwo" class="form-control hidden" id="valueTwo" placeholder="" autocomplete="OFF">
+          </div>
+        <div class="form-group col-lg-12 col-md-12">
+            <input type="submit" class="btn btn-primary btn-block" value="Buscar">
+        </div>
+      </form>
+
+      <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="card" style="width: 18rem;">
+                <h5 id="pName" class="card-title text-center">Pokemon Name</h5>
+                <img id="pImg" class="card-img-top" src="../img/pokemon.png" alt="">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">ID: <span id="pId">???</span></li>
+                  <li class="list-group-item">Altura: <span id="pHeight">???</span></li>
+                  <li class="list-group-item">Peso: <span id="pWeight">???</span></li>
+                  <li class="list-group-item">Tipo: <span id="pType">???</span></li>
+                  <li class="list-group-item">Habilidades: <span id="pAbilities">???</span></li>
+                </ul>
+              </div>
+          </div>
+
+          <div class="col-lg-6 col-md-12 scrollable">
+            <table class="table" >
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" id="listTitle">Pokémons</th>
+                  </tr>
+                </thead>
+                <tbody id="listPokemons" class="bodyPokemons">
+                </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+    <script src="../js/script.js"></script>
+</body>
+</html>

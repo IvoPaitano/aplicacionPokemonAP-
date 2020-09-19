@@ -1,0 +1,31 @@
+.hidden{
+    display: none;
+    transition-duration: 3s;
+}
+body{
+    background-image: url('../img/backgroundPokemon.png');
+}
+.scrollable{
+    max-height: 52vh;
+    overflow-y: scroll;
+}
+form{
+    font-weight: bold;
+}
+.hamburger{
+    background-color: lightblue;
+}
+#pokemonModal{
+    background-color:lightblue;
+    transition-duration: 2s;
+    position: fixed;
+    z-index: 9999;
+    border-radius: 1%;
+    border: 1px solid black;
+}
+#pokemonModal ul{
+    list-style: none;
+}
+.card{
+    margin: 0 auto;
+}
