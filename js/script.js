@@ -17,6 +17,16 @@ const pjWeight = document.getElementById('pWeight');
 const pjType = document.getElementById('pType');
 const pjAbilities = document.getElementById('pAbilities');
 
+const toKgs = (weight) => {
+    const weightKgs = weight.toString().slice(0,-1)+','+weight.toString().slice(-1)+' KG.';
+    return weightKgs;
+}
+
+const toMs = (height) => {
+    const heightMts = height.toString().slice(0,-1)+','+height.toString().slice(-1)+' M.';
+    return heightMts;
+}
+
 const button = document.getElementById('menuButton');
 button.addEventListener('click', (e)=>{
     button.classList.toggle('is-active')
@@ -43,7 +53,6 @@ const infoPokemon = (paramUrl) =>{
     .then(res => res.ok ? Promise.resolve(res) : Promise.reject(res))
         .then(res => res.json())
         .then(infoPokemon => {
-            console.log(infoPokemon);
             const pName = infoPokemon.name;
             const pId = infoPokemon.id;
             const pImg = infoPokemon.sprites.other.dream_world.front_default;
@@ -58,8 +67,8 @@ const infoPokemon = (paramUrl) =>{
                 pjName.textContent = pName;
                 pjId.textContent = pId;
                 pjImg.setAttribute('src',pImg);
-                pjHeight.textContent = pHeight;
-                pjWeight.textContent = pWeight;
+                pjHeight.textContent = toMs(pHeight);
+                pjWeight.textContent = toKgs(pWeight);
                 pjType.textContent = pType;
                 pjAbilities.textContent = pAbilities;
         })
@@ -80,7 +89,6 @@ const infoPokemonsType = (paramUrl,classification) =>{
                 fragment.appendChild(trPokemon);
             })
             agregarTabla(tablePokemons,fragment);
-            // search.value = 'typePokemon' ? listTitel.textContent = `Tipo : ${listPokemonsType.name}` : listTitel.textContent = `Habilidad : ${listPokemonsType.name}`;
             listTitel.textContent = `${classification} ${listPokemonsType.name}`;
         })
 }
@@ -139,8 +147,7 @@ search.addEventListener('change',(e)=>{
 
 form.addEventListener('submit',(e) => {
     const search = document.getElementById('search').value;
-    const param = valueOne.value;
-
+    const param = valueOne.value.toLowerCase();
     switch (search) {
         case 'idPokemon':
         case 'name':

@@ -17,11 +17,13 @@ form{
 }
 #pokemonModal{
     background-color:lightblue;
-    transition-duration: 2s;
     position: fixed;
     z-index: 9999;
     border-radius: 1%;
     border: 1px solid black;
+    max-height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 #pokemonModal ul{
     list-style: none;
