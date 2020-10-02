@@ -28,9 +28,9 @@ const toMs = (height) => {
 }
 
 const button = document.getElementById('menuButton');
-button.addEventListener('click', (e)=>{
-    button.classList.toggle('is-active')
-    pokemonModal.classList.toggle('hidden');
+button.addEventListener('click', ()=>{
+    button.classList.toggle('is-active');
+    $('#pokemonModal').fadeToggle(2000);
 })
 
 const borrarTrs = () =>{
